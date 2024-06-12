@@ -844,14 +844,21 @@ txtSoLuong.setText("");
 
     private void txtTenKhachHangFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtTenKhachHangFocusLost
         // TODO add your handling code here:
+        DatTraSuaController controller = new DatTraSuaController();
+        String tenKhachHang = controller.getTenKH(txtSoDienThoai.getText());
+        
+      
     if(txtTenKhachHang.getText().isEmpty())
     {
             JOptionPane.showMessageDialog(this, "Tên khách hàng trống. Cần nhập tên khách hàng");
             return;
     }//GEN-LAST:event_txtTenKhachHangFocusLost
+    else if(txtTenKhachHang.getText().equals(tenKhachHang) )
+    {
+        return;
+    }
     else 
     {
-        DatTraSuaController  controller = new DatTraSuaController();
             controller.themKhachHangMoi(txtTenKhachHang.getText(), txtSoDienThoai.getText());
     }
     }

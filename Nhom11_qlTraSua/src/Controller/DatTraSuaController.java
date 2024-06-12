@@ -348,6 +348,7 @@ return lsNhanVien;
           
           String maKhachHang = "";
            maKhachHang = getIdKhachHang(datTraSua.getSoDienThoai());
+           JOptionPane.showMessageDialog(null, maKhachHang);
           if(maKhachHang.isEmpty())
           {
               maKhachHang = taoMaKhachHang();
