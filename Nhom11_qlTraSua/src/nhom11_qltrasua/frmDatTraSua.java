@@ -44,14 +44,15 @@ public class frmDatTraSua extends javax.swing.JFrame {
     float tongTien = 0;
     private void loadThongTinTraSuaTrongButton()
     {
-        ArrayList<String> lsTenTraSua  = new ArrayList<>();
+        ArrayList<TraSua> lsTenTraSua  = new ArrayList<>();
         DatTraSuaController datTraSuaController = new DatTraSuaController();
-       lsTenTraSua = datTraSuaController.getTenTraSua();
+       lsTenTraSua = datTraSuaController.getTraSua();
          int x = 10, y = 20 , count = 0;
-        for (String traSua: lsTenTraSua)
+        for (TraSua traSua: lsTenTraSua)
         {
-           
-           JButton   button = new JButton(traSua);
+             ImageIcon imageIcon = new ImageIcon( "src\\Img\\" + traSua.getIdHinh());
+                            Image image = imageIcon.getImage().getScaledInstance(50,70, Image.SCALE_SMOOTH);
+           JButton   button = new JButton(traSua.getTenTraSua(),new ImageIcon(image));
                pnlMenu.add(button);
                button.setBounds(x, y, 150, 100);
                button.setMargin(new Insets(0,0,0,0));
@@ -106,9 +107,9 @@ public class frmDatTraSua extends javax.swing.JFrame {
                            khuyenMai = Float.parseFloat(txtKhuyenMai.getText());
                        } 
                        
-                       
+                       int soLuong = 1;
                        float giaBan = Float.parseFloat(lblGiaBan.getText());
-                         Object[] objects =   addInforIntoList(lblTenTraSua.getText(),giaBan ,khuyenMai );
+                         Object[] objects =   addInforIntoList(lblTenTraSua.getText(),giaBan ,khuyenMai,soLuong );
                                model.addRow(objects);
                                txtKhuyenMai.setText("");
                                
@@ -127,10 +128,10 @@ public class frmDatTraSua extends javax.swing.JFrame {
     
     
     
-    public Object[]  addInforIntoList(String tenTraSua, float giaBan, float khuyenMai)
+    public Object[]  addInforIntoList(String tenTraSua, float giaBan, float khuyenMai, int soLuong)
         {
            
-            int soLuong = 1 ;
+             soLuong = 1 ;
            
              if(khuyenMai != 0)
                 khuyenMai = giaBan * soLuong * khuyenMai/100;
@@ -701,7 +702,8 @@ public class frmDatTraSua extends javax.swing.JFrame {
               // l?y th�ng tin c� s?n t? b?ng tblDsMuaHang
               float giaBan = Float.parseFloat(model.getValueAt(chon, 1).toString());
           float khuyenMai = Float.parseFloat(txtKhuyenMai.getText());
-          Object[] objects = addInforIntoList(model.getValueAt(chon,0).toString(), giaBan, khuyenMai);
+          int soLuong = Integer.parseInt(model.getValueAt(chon, 2).toString());
+          Object[] objects = addInforIntoList(model.getValueAt(chon,0).toString(), giaBan, khuyenMai,soLuong);
           float giaKhuyenMai = Float.parseFloat(objects[3].toString());
             // c?p nh?t l?i gi� khuy?n m�i 
           model.setValueAt(giaKhuyenMai, chon, 3);
@@ -765,10 +767,12 @@ public class frmDatTraSua extends javax.swing.JFrame {
         if(txtSoLuong.getText().isEmpty())
             txtSoLuong.setText("1");
         model.setValueAt(txtSoLuong.getText(), indexRow, 2);
-        float soLuong = Float.parseFloat(tblDsMuaHang.getValueAt(indexRow, 2).toString());
+        int soLuong = Integer.parseInt(tblDsMuaHang.getValueAt(indexRow, 2).toString());
     Float giaBan =  Float.parseFloat(tblDsMuaHang.getValueAt(indexRow, 1).toString());
     Float khuyenMai = Float.parseFloat(tblDsMuaHang.getValueAt(indexRow, 3).toString());
-                     float thanhTien = giaBan * soLuong - khuyenMai *soLuong;
+    Float giaKhuyenMai = khuyenMai * soLuong;
+                     float thanhTien = giaBan * soLuong - giaKhuyenMai;
+                     model.setValueAt(giaKhuyenMai, indexRow, 3);
                      model.setValueAt(thanhTien, indexRow, 4);
 
              lblTongTien.setText("0.0");
@@ -802,7 +806,6 @@ txtSoLuong.setText("");
        DatTraSua  datTraSua = null;
         String tenNhanVien = cboNhanVien.getSelectedItem().toString();
        
-        JOptionPane.showMessageDialog(null, tblDsMuaHang.getRowCount() );
          float khuyenMai  = 0;   float tongTien = 0;
         for(int i = 0; i< tblDsMuaHang.getRowCount(); i++)
                 {

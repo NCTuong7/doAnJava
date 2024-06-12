@@ -190,9 +190,9 @@ GO
 
 
 	insert into KHACHHANG values ('KH001',N' Nguyễn Thị B','0587692446'),
-								 ('KH002',N' Huỳnh Văn C','06948556872'),
+								 ('KH002',N' Huỳnh Văn C','0694855687'),
 								 ('KH003',N' Trần Chí C','0385922016'),
-								 ('KH004',N' Đặng Thanh D','069298776'),
+								 ('KH004',N' Đặng Thanh D','0692987765'),
 								 ('KH005',N' Đinh Thành H','0847285998')
 
 	select * from KHACHHANG

@@ -27,22 +27,22 @@ import javax.swing.JOptionPane;
  * @author Nguyen Cat Tuong
  */
 public class DatTraSuaController {
-     public ArrayList<String> getTenTraSua()
+     public ArrayList<TraSua> getTraSua()
     {
-                   ArrayList<String> lsTenTraSua = new ArrayList<>();
+                   ArrayList<TraSua> lsTenTraSua = new ArrayList<>();
 
        try
           {
             Connection con;
             con = KetNoi.connectToDatabase();
             
-            String sql= "select  TENTRASUA from TRASUA";
+            String sql= "select  TENTRASUA, IdHinh from TRASUA";
             
                Statement st = con.createStatement();
                ResultSet rs = st.executeQuery(sql);
               while (rs.next())
               {
-                lsTenTraSua.add(rs.getString("TENTRASUA"));
+                lsTenTraSua.add(new TraSua(rs.getString("TENTRASUA"),rs.getString("IdHinh")));
               }
         
         } catch (SQLException ex) {
@@ -299,13 +299,11 @@ return lsNhanVien;
                
             }
              if (number >= 0 && number < 10)
-                idKhachHang = "S000" + String.valueOf(number + 1);
+                idKhachHang = "KH00" + String.valueOf(number + 1);
             else if (number >= 10 && number < 100) 
-                idKhachHang ="S00" + String.valueOf(number +1);
+                idKhachHang ="KH0" + String.valueOf(number +1);
             else if (number >= 100 && number < 1000)
-                idKhachHang = "S0" + String.valueOf(number + 1);
-            else if (number >= 1000 && number < 10000)
-                idKhachHang = "S" + String.valueOf(number +1);
+                idKhachHang = "KH" + String.valueOf(number + 1);
             else
                 JOptionPane.showMessageDialog(null, "Hóa đơn trong cơ sở dữ liệu đã đầy. Vui lòng liên hệ nhà phát triển để tăng ô chứa dữ liệu!");
         } catch (SQLException ex) {
@@ -319,11 +317,11 @@ return lsNhanVien;
          String idKhachHang = taoMaKhachHang();
          try 
                  {
-                     String sql = "insert into KHACHHANG values (?,?,?,?)";
+                     String sql = "insert into KHACHHANG values (?,?,?)";
                      Connection conn = KetNoi.connectToDatabase();
                      PreparedStatement psm = conn.prepareStatement(sql);
-                     psm.setString(0, idKhachHang);
-                     psm.setString(1, tenKhachHang);
+                     psm.setString(1, idKhachHang);
+                     psm.setString(2, tenKhachHang);
                      psm.setString(3, soDienThoai);
                      
                      psm.executeUpdate();
@@ -417,7 +415,7 @@ return lsNhanVien;
             st.setFloat (4, datTraSua.getKhuyenMai());
             st.setFloat(5, datTraSua.getThanhTien());
             st.executeUpdate();
-            JOptionPane.showMessageDialog(null, "Thêm chi tiết hóa đơn thành công");
+            JOptionPane.showMessageDialog(null, "Đã lưu đơn hàng thành công");
             
          } catch (SQLException ex) {
              Logger.getLogger(DatTraSuaController.class.getName()).log(Level.SEVERE, null, ex);

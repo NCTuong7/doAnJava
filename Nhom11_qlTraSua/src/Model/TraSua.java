@@ -15,6 +15,11 @@ import javax.swing.ImageIcon;
 public class TraSua {
     
     String maTraSua;
+
+    public TraSua(String tenTraSua, String idHinh) {
+        this.tenTraSua = tenTraSua;
+        this.idHinh = idHinh;
+    }
     String tenTraSua;
     float giaBan;
     float giaNhap;
