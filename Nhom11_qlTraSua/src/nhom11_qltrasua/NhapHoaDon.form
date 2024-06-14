@@ -398,7 +398,6 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Tahoma" size="14" style="0"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="jLabel19"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="btnreset">
@@ -428,7 +427,6 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Tahoma" size="14" style="0"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="jLabel20"/>
           </Properties>
         </Component>
       </SubComponents>

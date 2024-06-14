@@ -244,7 +244,6 @@ public class NhapHoaDon extends javax.swing.JFrame {
         });
 
         lbtongtien.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        lbtongtien.setText("jLabel19");
 
         btnreset.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         btnreset.setText("Hủy");
@@ -263,7 +262,6 @@ public class NhapHoaDon extends javax.swing.JFrame {
         });
 
         lbtientrakhach.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        lbtientrakhach.setText("jLabel20");
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
