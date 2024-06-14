@@ -53,6 +53,7 @@ public class frmDanhSachTraSua extends javax.swing.JFrame {
         btnBack = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Danh sách trà sữa");
 
         tblDsTraSua.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {

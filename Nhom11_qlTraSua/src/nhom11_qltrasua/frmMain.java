@@ -41,6 +41,8 @@ public class frmMain extends javax.swing.JFrame {
         {
             btnDanSachNhaCungCap.setEnabled(false);
             admin = 1;
+//                    hienThiTenNhanVien();
+
             
         }
        
@@ -49,6 +51,7 @@ public class frmMain extends javax.swing.JFrame {
     {
         initComponents();
         showLogoStore();
+//        hienThiTenNhanVien();
     }
     
    
@@ -189,7 +192,7 @@ public class frmMain extends javax.swing.JFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(73, Short.MAX_VALUE)
+                .addContainerGap(87, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -360,6 +363,12 @@ this.dispose();
         });
     }
 
+//     private void hienThiTenNhanVien()
+//    {
+//        PhanQuyen phanQuyen = new PhanQuyen();
+//        if(phanQuyen.getTaiKhoanCu().equals("admin"))
+//        lblAdmin.setText("welcome: " + phanQuyen.getTaiKhoanCu().toString());
+//    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDanSachNhaCungCap;
     private javax.swing.JButton btnDsHoaDon;

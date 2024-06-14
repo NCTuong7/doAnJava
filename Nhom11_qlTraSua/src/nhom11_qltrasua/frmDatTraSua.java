@@ -8,13 +8,20 @@ package nhom11_qltrasua;
 import Model.TraSua;
 import Model.DatTraSua;
 import Controller.DatTraSuaController;
+import Model.KetNoi;
 import Model.PhanQuyen;
 import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -35,7 +42,9 @@ public class frmDatTraSua extends javax.swing.JFrame {
       loadThongTinTraSuaTrongButton();
          makeHoaDonID();
          loadTenNhanVien();
+         layTenNhanVien();
 //         renderMenu();
+
         
     }
         
@@ -229,6 +238,11 @@ public class frmDatTraSua extends javax.swing.JFrame {
         btnTaoHoaDon.setBackground(new java.awt.Color(153, 255, 153));
         btnTaoHoaDon.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         btnTaoHoaDon.setText("Tạo hóa đơn");
+        btnTaoHoaDon.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTaoHoaDonActionPerformed(evt);
+            }
+        });
 
         btnThoat.setBackground(new java.awt.Color(255, 51, 102));
         btnThoat.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
@@ -611,6 +625,35 @@ public class frmDatTraSua extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void layTenNhanVien()
+    {
+        int viTri =0;
+       String tenNV = null;
+        try
+        {
+            DatTraSuaController controller = new DatTraSuaController();
+            PhanQuyen phanQuyen = new PhanQuyen();
+            ArrayList<String> lsTenNhanVien = new ArrayList<>();
+            lsTenNhanVien = controller.getTenNhanVien();
+            Connection conn = KetNoi.connectToDatabase();
+            String sql = "select TENNV FROM NHANVIEN JOIN DANGNHAP ON DANGNHAP.MANV = NHANVIEN.MANV and DANGNHAP.TAIKHOAN = '"+phanQuyen.getTaiKhoanCu()+"'";
+            Statement st = conn.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            if(rs.next())
+               tenNV = rs.getString("TENNV");
+            
+            for (int i = 0; i< lsTenNhanVien.size();i++)
+            {
+                if(lsTenNhanVien.get(i).equals(tenNV))
+                    viTri = i;
+            }
+             cboNhanVien.setSelectedIndex(viTri);
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(frmDatTraSua.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
         // TODO add your handling code here:
         
@@ -879,6 +922,13 @@ txtSoLuong.setText("");
     private void txtSoDienThoaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSoDienThoaiActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtSoDienThoaiActionPerformed
+
+    private void btnTaoHoaDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTaoHoaDonActionPerformed
+        // TODO add your handling code here:
+        NhapHoaDon nhapHoaDon = new NhapHoaDon();
+        nhapHoaDon.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnTaoHoaDonActionPerformed
 
     /**
      * @param args the command line arguments

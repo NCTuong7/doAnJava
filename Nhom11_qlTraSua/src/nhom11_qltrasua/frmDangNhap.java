@@ -9,6 +9,9 @@ import Model.NhanVien;
 import Model.KetNoi;
 import Model.PhanQuyen;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -17,8 +20,13 @@ import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.scene.control.TitledPane;
+import javax.swing.AbstractAction;
+import javax.swing.ActionMap;
 import javax.swing.ImageIcon;
+import javax.swing.InputMap;
+import javax.swing.JComponent;
 import javax.swing.JOptionPane;
+import javax.swing.KeyStroke;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -84,6 +92,11 @@ public class frmDangNhap extends javax.swing.JFrame {
         btnDangNhap.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDangNhapActionPerformed(evt);
+            }
+        });
+        btnDangNhap.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                btnDangNhapKeyPressed(evt);
             }
         });
 
@@ -182,6 +195,7 @@ public class frmDangNhap extends javax.swing.JFrame {
                                       frmMain main = new frmMain(nhanVien.getTaiKhoan());
                                       frmMainNhanVien mainNhanVien = new frmMainNhanVien();
                                       PhanQuyen  phanQuyen = new PhanQuyen();
+        
                        if(txtTaiKhoan.getText().toString().equals(taiKhoan) && txtMatKhau.getText().toString().equals(matKhau))
                     {
                             
@@ -216,6 +230,70 @@ public class frmDangNhap extends javax.swing.JFrame {
             Logger.getLogger(frmDanhSachTraSua.class.getName()).log(Level.SEVERE, null, ex);
         } 
     }//GEN-LAST:event_btnDangNhapActionPerformed
+
+    private void btnDangNhapKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnDangNhapKeyPressed
+        // TODO add your handling code here:
+       if(evt.getKeyCode() == KeyEvent.VK_ENTER)
+       {
+             if(txtMatKhau.getText().isEmpty() || txtTaiKhoan.getText().isEmpty())
+        {
+            JOptionPane.showMessageDialog(this, "Tài khoản hoặc mật khẩu không được để trống");
+            return;
+        }
+      
+        try 
+        {
+            Connection con = KetNoi.connectToDatabase(); // Kết nối sql
+            String sql= "select * from DANGNHAP";
+            Statement st = (Statement) con.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            String matKhau = null;
+            String taiKhoan = null;
+            int correct =0;
+           
+                while (rs.next())
+                {
+                     taiKhoan = rs.getString("TAIKHOAN");
+                      matKhau = rs.getString("MATKHAU");
+                      NhanVien nhanVien = new NhanVien(taiKhoan, matKhau);
+                                      frmMain main = new frmMain(nhanVien.getTaiKhoan());
+                                      frmMainNhanVien mainNhanVien = new frmMainNhanVien();
+                                      PhanQuyen  phanQuyen = new PhanQuyen();
+        
+                       if(txtTaiKhoan.getText().toString().equals(taiKhoan) && txtMatKhau.getText().toString().equals(matKhau))
+                    {
+                            
+                phanQuyen.setTaiKhoanCu(taiKhoan);
+                        if(taiKhoan.equals("admin"))
+                        {
+                             main.setVisible(true);
+                         this.dispose();
+                         correct = 1;
+                         break;
+                        }
+                        else 
+                        {
+                            mainNhanVien.setVisible(true);
+                            this.dispose();
+                            correct =1;
+                            break;
+                        }
+                      }
+                }
+           
+           if (correct == 0)
+           {
+               JOptionPane.showMessageDialog(null, "Sai tài khoản hoặc mật khẩu");
+               return;
+           }
+          
+            
+            con.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(frmDanhSachTraSua.class.getName()).log(Level.SEVERE, null, ex);
+        } 
+       }
+    }//GEN-LAST:event_btnDangNhapKeyPressed
 
         
     /**
@@ -262,6 +340,7 @@ public class frmDangNhap extends javax.swing.JFrame {
               return;
 
    }
+     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDangNhap;
     private javax.swing.JLabel jLabel1;
