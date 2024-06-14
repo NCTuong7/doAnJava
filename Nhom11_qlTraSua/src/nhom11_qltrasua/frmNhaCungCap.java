@@ -7,6 +7,7 @@ package nhom11_qltrasua;
 
 import Model.NhanVien;
 import Model.KetNoi;
+import Model.PhanQuyen;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -488,11 +489,19 @@ public class frmNhaCungCap extends javax.swing.JFrame {
 
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
         // TODO add your handling code here:
-        NhanVien nhanVien = new NhanVien();
-        
-        frmMain main = new frmMain();
-        main.setVisible(true);
-        this.setVisible(false);
+      PhanQuyen  phanQuyen = new PhanQuyen();
+if(phanQuyen.getTaiKhoanCu().equals("admin"))
+{
+       frmMain m = new frmMain();
+        m.setVisible(true);
+        this.dispose();
+}
+else 
+{
+    frmMainNhanVien nhanVien = new frmMainNhanVien();
+    nhanVien.setVisible(true);
+    this.dispose();;
+}
         
     }//GEN-LAST:event_btnCancelActionPerformed
 

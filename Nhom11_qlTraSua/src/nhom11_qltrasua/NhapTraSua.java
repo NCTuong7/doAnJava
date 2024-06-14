@@ -28,6 +28,7 @@ import javax.swing.JOptionPane;
 import javax.swing.RowFilter;
 import javax.swing.table.TableRowSorter;
 import Model.KetNoi;
+import Model.PhanQuyen;
 import Model.TraSua;
 /**
  *
@@ -417,7 +418,19 @@ public class NhapTraSua extends javax.swing.JFrame {
     }
     private void btnthoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnthoatActionPerformed
         // TODO add your handling code here:
-         dispose();
+         PhanQuyen  phanQuyen = new PhanQuyen();
+if(phanQuyen.getTaiKhoanCu().equals("admin"))
+{
+       frmMain m = new frmMain();
+        m.setVisible(true);
+        this.dispose();
+}
+else 
+{
+    frmMainNhanVien nhanVien = new frmMainNhanVien();
+    nhanVien.setVisible(true);
+    this.dispose();;
+}
     }//GEN-LAST:event_btnthoatActionPerformed
 
     private void btnxoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnxoaActionPerformed

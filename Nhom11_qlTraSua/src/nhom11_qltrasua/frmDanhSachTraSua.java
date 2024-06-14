@@ -7,6 +7,7 @@ package nhom11_qltrasua;
 
 
 import Model.KetNoi;
+import Model.PhanQuyen;
 import java.awt.PopupMenu;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -49,6 +50,7 @@ public class frmDanhSachTraSua extends javax.swing.JFrame {
         txtTimKiemTraSua = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+        btnBack = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -75,6 +77,15 @@ public class frmDanhSachTraSua extends javax.swing.JFrame {
 
         jButton1.setText("Tìm Kiếm");
 
+        btnBack.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        btnBack.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/exit.png"))); // NOI18N
+        btnBack.setText("Back");
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -98,6 +109,10 @@ public class frmDanhSachTraSua extends javax.swing.JFrame {
                                 .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 211, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(478, 478, 478)
+                .addComponent(btnBack)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -109,9 +124,11 @@ public class frmDanhSachTraSua extends javax.swing.JFrame {
                     .addComponent(jLabel8)
                     .addComponent(txtTimKiemTraSua, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(203, 203, 203))
+                .addGap(79, 79, 79)
+                .addComponent(btnBack)
+                .addGap(99, 99, 99))
         );
 
         pack();
@@ -125,6 +142,24 @@ public class frmDanhSachTraSua extends javax.swing.JFrame {
             txtTimKiemTraSua.setText(String.valueOf(tblDsTraSua.getValueAt(co, 1)));
         }
     }//GEN-LAST:event_tblDsTraSuaMouseClicked
+
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+        // TODO add your handling code here:
+        
+        PhanQuyen  phanQuyen = new PhanQuyen();
+if(phanQuyen.getTaiKhoanCu().equals("admin"))
+{
+       frmMain m = new frmMain();
+        m.setVisible(true);
+        this.dispose();
+}
+else 
+{
+    frmMainNhanVien nhanVien = new frmMainNhanVien();
+    nhanVien.setVisible(true);
+    this.dispose();;
+}
+    }//GEN-LAST:event_btnBackActionPerformed
 
     /**
      * @param args the command line arguments
@@ -202,6 +237,7 @@ public class frmDanhSachTraSua extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBack;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;

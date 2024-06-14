@@ -8,6 +8,7 @@ package nhom11_qltrasua;
 import Model.TraSua;
 import Model.DatTraSua;
 import Controller.DatTraSuaController;
+import Model.PhanQuyen;
 import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.Insets;
@@ -642,9 +643,20 @@ public class frmDatTraSua extends javax.swing.JFrame {
     private void btnThoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThoatActionPerformed
         // TODO add your handling code here:
 //     /
-        frmMain m = new frmMain();
+PhanQuyen  phanQuyen = new PhanQuyen();
+if(phanQuyen.getTaiKhoanCu().equals("admin"))
+{
+       frmMain m = new frmMain();
         m.setVisible(true);
-        this.setVisible(false);
+        this.dispose();
+}
+else 
+{
+    frmMainNhanVien nhanVien = new frmMainNhanVien();
+    nhanVien.setVisible(true);
+    this.dispose();;
+}
+     
     }//GEN-LAST:event_btnThoatActionPerformed
 
     private void txtSoDienThoaiFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSoDienThoaiFocusLost

@@ -5,6 +5,7 @@
  */
 package nhom11_qltrasua;
 
+import Model.PhanQuyen;
 import java.awt.Image;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -168,6 +169,7 @@ public class frmMainNhanVien extends javax.swing.JFrame {
     private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
         // TODO add your handling code here:
         frmDangNhap Login = new frmDangNhap();
+        PhanQuyen.xoaPhanQuyen();
         Login.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnExitActionPerformed

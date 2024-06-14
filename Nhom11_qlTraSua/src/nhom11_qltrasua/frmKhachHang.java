@@ -5,6 +5,7 @@
  */
 package nhom11_qltrasua;
 
+import Model.PhanQuyen;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -703,9 +704,19 @@ public class frmKhachHang extends javax.swing.JFrame {
         int kq= JOptionPane.showConfirmDialog(this, "Bạn có muốn đóng trang này không ???","Thông báo",JOptionPane.YES_NO_OPTION,JOptionPane.WARNING_MESSAGE);
         if(kq==JOptionPane.YES_OPTION)
         {
-            frmMain main = new frmMain();
-           main.setVisible(true);
-           this.dispose();
+           PhanQuyen  phanQuyen = new PhanQuyen();
+if(phanQuyen.getTaiKhoanCu().equals("admin"))
+{
+       frmMain m = new frmMain();
+        m.setVisible(true);
+        this.dispose();
+}
+else 
+{
+    frmMainNhanVien nhanVien = new frmMainNhanVien();
+    nhanVien.setVisible(true);
+    this.dispose();;
+}
         }
     }//GEN-LAST:event_btnDongActionPerformed
 

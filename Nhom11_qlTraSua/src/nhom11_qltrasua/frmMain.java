@@ -6,6 +6,7 @@
 package nhom11_qltrasua;
 
 import Model.NhanVien;
+import Model.PhanQuyen;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -305,8 +306,10 @@ this.dispose();
     private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
         // TODO add your handling code here:
         frmDangNhap Login = new frmDangNhap();
+        PhanQuyen.xoaPhanQuyen();
         Login.setVisible(true);
         this.setVisible(false);
+       
     }//GEN-LAST:event_btnExitActionPerformed
 
     private void btnOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOrderActionPerformed
