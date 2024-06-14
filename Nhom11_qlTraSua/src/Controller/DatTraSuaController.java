@@ -312,21 +312,21 @@ return lsNhanVien;
         return idKhachHang;
      }
      
-     public void themKhachHangMoi(String tenKhachHang, String soDienThoai)
+     public void themKhachHangMoi(String tenKhachHang, String soDienThoai,int trangThai)
      {
          String idKhachHang = taoMaKhachHang();
          try 
                  {
-                     String sql = "insert into KHACHHANG values (?,?,?)";
+                     String sql = "insert into KHACHHANG values (?,?,?,?)";
                      Connection conn = KetNoi.connectToDatabase();
                      PreparedStatement psm = conn.prepareStatement(sql);
                      psm.setString(1, idKhachHang);
                      psm.setString(2, tenKhachHang);
                      psm.setString(3, soDienThoai);
-                     
+                     psm.setInt(4, trangThai);
                      psm.executeUpdate();
                      psm.close();
-                     JOptionPane.showMessageDialog(null, "Khách hàng này đã có trong cơ sở dữ liệu");
+                     JOptionPane.showMessageDialog(null, "Khách hàng mới");
                  } catch (SQLException ex) {
              Logger.getLogger(DatTraSuaController.class.getName()).log(Level.SEVERE, null, ex);
          }
@@ -348,7 +348,6 @@ return lsNhanVien;
           
           String maKhachHang = "";
            maKhachHang = getIdKhachHang(datTraSua.getSoDienThoai());
-           JOptionPane.showMessageDialog(null, maKhachHang);
           if(maKhachHang.isEmpty())
           {
               maKhachHang = taoMaKhachHang();

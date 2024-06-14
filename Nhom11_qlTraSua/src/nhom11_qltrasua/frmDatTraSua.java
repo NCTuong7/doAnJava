@@ -859,7 +859,8 @@ txtSoLuong.setText("");
     }
     else 
     {
-            controller.themKhachHangMoi(txtTenKhachHang.getText(), txtSoDienThoai.getText());
+        int trangThai = 1;
+            controller.themKhachHangMoi(txtTenKhachHang.getText(), txtSoDienThoai.getText(),trangThai);
     }
     }
     

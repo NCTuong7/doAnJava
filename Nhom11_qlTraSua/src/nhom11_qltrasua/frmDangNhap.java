@@ -7,6 +7,7 @@ package nhom11_qltrasua;
 
 import Model.NhanVien;
 import Model.KetNoi;
+import Model.PhanQuyen;
 import java.awt.Image;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -179,15 +180,27 @@ public class frmDangNhap extends javax.swing.JFrame {
                       matKhau = rs.getString("MATKHAU");
                       NhanVien nhanVien = new NhanVien(taiKhoan, matKhau);
                                       frmMain main = new frmMain(nhanVien.getTaiKhoan());
+                                      frmMainNhanVien mainNhanVien = new frmMainNhanVien();
+                                      PhanQuyen  phanQuyen = new PhanQuyen();
                        if(txtTaiKhoan.getText().toString().equals(taiKhoan) && txtMatKhau.getText().toString().equals(matKhau))
                     {
                             
-                
-                         main.setVisible(true);
+                phanQuyen.setTaiKhoanCu(taiKhoan);
+                        if(taiKhoan.equals("admin"))
+                        {
+                             main.setVisible(true);
                          this.dispose();
                          correct = 1;
                          break;
                 
+                        }
+                        else 
+                        {
+                            mainNhanVien.setVisible(true);
+                            this.dispose();
+                            correct =1;
+                            break;
+                        }
                       }
                 }
            
