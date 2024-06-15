@@ -45,6 +45,7 @@ public class NhapHoaDon extends javax.swing.JFrame {
         laytongTien();
         layMaNV();
         laySdtNV();
+        layTenKH();
                 ShowDuLieu();
 
     }
@@ -137,7 +138,7 @@ public class NhapHoaDon extends javax.swing.JFrame {
         jLabel10.setText("Mã hóa đơn:");
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel11.setText("Mã KH:");
+        jLabel11.setText("Ten KH:");
 
         lbtennv.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lbtennv.setText("jLabel13");
@@ -448,6 +449,12 @@ lbtongtien.setText("0");
 
     private void txttienkhachduaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txttienkhachduaFocusLost
         // TODO add your handling code here:
+        if(txttienkhachdua.getText().isEmpty())
+        {
+            JOptionPane.showMessageDialog(null, "Bạn chưa nhập tiền khách đưa");
+            txttienkhachdua.requestFocus();
+            return;
+        }
         tienTraKhach();
     }//GEN-LAST:event_txttienkhachduaFocusLost
 
@@ -504,6 +511,20 @@ lbtongtien.setText("0");
         } 
     }
     
+     private void layTenKH() {
+        try {
+            Connection conn = KetNoi.connectToDatabase();
+            String sql = "SELECT TENKH  FROM KHACHHANG where MAKH = '"+layMaKH()+"'";
+            Statement st = conn.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            if(rs.next())
+                lbmakh.setText(rs.getString("TENKH"));
+                lbmakh.setForeground(Color.blue);
+        }catch (SQLException ex) {
+            Logger.getLogger(NhapHoaDon.class.getName()).log(Level.SEVERE, null, ex);
+        } 
+    }
+    
     private String layMaKH() {
          String maKH = null;
         try
@@ -514,8 +535,9 @@ lbtongtien.setText("0");
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(sql);
             if(rs.next())
-            {  lbmakh.setText(rs.getString("MaKH"));
-                lbmakh.setForeground(Color.blue);
+            {
+//                lbmakh.setText(rs.getString("MaKH"));
+//                lbmakh.setForeground(Color.blue);
               maKH =   rs.getString("MaKH");
             }
         } catch (SQLException ex) {
