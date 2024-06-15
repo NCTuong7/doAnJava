@@ -687,19 +687,22 @@ public class frmDatTraSua extends javax.swing.JFrame {
         // TODO add your handling code here:
 //     /
 PhanQuyen  phanQuyen = new PhanQuyen();
-if(phanQuyen.getTaiKhoanCu().equals("admin"))
+//JOptionPane.showMessageDialog(this, phanQuyen.getTaiKhoanCu());
+if(!phanQuyen.getTaiKhoanCu().equals("admin"))
 {
-       frmMain m = new frmMain();
-        m.setVisible(true);
-        this.dispose();
+      
+        
+         frmMainNhanVien nhanVien = new frmMainNhanVien();
+    nhanVien.setVisible(true);
+    this.dispose();
 }
 else 
 {
-    frmMainNhanVien nhanVien = new frmMainNhanVien();
-    nhanVien.setVisible(true);
-    this.dispose();;
-}
-     
+    frmMain m = new frmMain();
+        m.setVisible(true);
+        this.dispose();
+     }
+
     }//GEN-LAST:event_btnThoatActionPerformed
 
     private void txtSoDienThoaiFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSoDienThoaiFocusLost

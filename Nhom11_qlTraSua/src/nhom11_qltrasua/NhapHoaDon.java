@@ -443,6 +443,7 @@ lbtongtien.setText("0");
         // TODO add your handling code here:
         ThanhToanTrucTuyen thanhToanTrucTuyen = new ThanhToanTrucTuyen();
         thanhToanTrucTuyen.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btnthem2ActionPerformed
 
     private void txttienkhachduaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txttienkhachduaFocusLost
